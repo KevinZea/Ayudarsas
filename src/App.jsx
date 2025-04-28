@@ -9,8 +9,8 @@ import Testimonials from './components/Testimonials';
 import Location from './components/Location';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
 import AOS from 'aos';
+import WhatsAppButton from './components/WhatsappButton';
 
 function App() {
   useEffect(() => {
@@ -28,6 +28,7 @@ function App() {
       <Location />
       <Contact />
       <Footer />
+      <WhatsAppButton />
       {/* <ScrollToTop /> */}
     </Box>
   );
