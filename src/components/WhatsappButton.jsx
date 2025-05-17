@@ -1,21 +1,43 @@
 import { Button, Box } from '@chakra-ui/react';
-import { FaWhatsapp } from 'react-icons/fa'; // Importa el icono de WhatsApp
+import { FaWhatsapp } from 'react-icons/fa';
 
 const WhatsAppButton = () => {
     const phoneNumber = '573116652702';
-    const defaultMessage = encodeURIComponent('Hola, me gustaría saber más sobre tus servicios.'); // Codifica el mensaje para URL
+    const defaultMessage = encodeURIComponent('Hola, me gustaría saber más sobre tus servicios.');
 
     const handleClick = () => {
-        // Construye la URL de WhatsApp
         const waUrl = `https://wa.me/${phoneNumber}?text=${defaultMessage}`;
-        // Redirecciona al usuario a WhatsApp
-        window.open(waUrl, '_blank');
+
+        // Llama al evento de conversión
+        const callback = () => {
+            window.open(waUrl, '_blank');
+        };
+
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'conversion', {
+                send_to: 'AW-17089820690/BLZVCNmeoskaEJLwh9U_',
+                value: 1.0,
+                currency: 'COP',
+                event_callback: callback
+            });
+        } else {
+            // Si gtag no está disponible, redirige de todas formas
+            callback();
+        }
     };
 
     return (
-        <Box position="fixed" right="16px" bottom="16px" zIndex={2}> {/* Posicionamiento fijo en la esquina inferior derecha */}
-            <Button colorScheme="whatsapp" bg={"green.500"} variant={"solid"} onClick={handleClick} leftIcon={<FaWhatsapp size={"30"} />} size={"md"} borderRadius={"full"} p={5}>
-            </Button>
+        <Box position="fixed" right="16px" bottom="16px" zIndex={2}>
+            <Button
+                colorScheme="whatsapp"
+                bg="green.500"
+                variant="solid"
+                onClick={handleClick}
+                leftIcon={<FaWhatsapp size={30} />}
+                size="md"
+                borderRadius="full"
+                p={5}
+            />
         </Box>
     );
 };
